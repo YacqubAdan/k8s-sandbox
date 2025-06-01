@@ -1,0 +1,14 @@
+grafana:
+  enabled: true
+  service:
+    type: ClusterIP
+    port: 80
+  ingress:
+    enabled: false # Disable default Ingress since we're using IngressRoute
+
+prometheus:
+  service:
+    type: ClusterIP
+    port: 9090
+  ingress:
+    enabled: false # Disable default Ingres

@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: default
+  labels:
+    app: deltavids-app
+  name: deltavids-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: deltavids-app
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: deltavids-app
+    spec:
+      containers:
+      - image: yacquubadan/deltavids-app:v1
+        name: deltavids-app
+        ports:
+          - containerPort: 3000
+            protocol: TCP
+        resources: {}
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: deltavids-app
+  name: deltavids-app
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: deltavids-app
+  type: ClusterIP
